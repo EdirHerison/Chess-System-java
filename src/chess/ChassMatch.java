@@ -1,8 +1,11 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Piece;
+import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
+import chess.ChassPosition;
 
 public class ChassMatch {
  
@@ -21,6 +24,28 @@ public class ChassMatch {
 			 }
 		 }
 		 return mat;
+	}
+	
+	public ChassPiece performChassMovie(ChassPosition sourcePosition, ChassPosition targetPosition) {
+		Position source = sourcePosition.toPosition();
+		Position target = targetPosition.toPosition();
+		validateSourcePosition(source);
+		Piece capturedPiece = makeMove(source, target);
+		return (ChassPiece)capturedPiece;
+	}
+	
+	private Piece makeMove(Position source, Position target) {
+		Piece p = board.removePiece(source);
+		Piece capturedPiece = board.removePiece(target);
+		board.placePiece(p, target);
+		return capturedPiece;
+	}
+	
+	private void validateSourcePosition(Position position) {
+		if(!board.thereIsPiece(position)) {
+			throw new ChassException("Erro! Não existe peça nessa posição");
+		}
+		
 	}
 	
 	private void placeNewPiece(char column, int line, ChassPiece piece) {

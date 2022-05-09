@@ -1,6 +1,10 @@
 package application;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 import chess.ChassPiece;
+import chess.ChassPosition;
 import chess.Color;
 
 public class UI {
@@ -24,6 +28,19 @@ public class UI {
 	public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 	public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
   
+	public static ChassPosition readChassPosition(Scanner sc) {
+		try {
+			String s = sc.nextLine();
+			char column = s.charAt(0);
+			int line = Integer.parseInt(s.substring(1));
+			return new ChassPosition(column, line);
+		}
+		catch (RuntimeException e) {
+			throw new InputMismatchException("Erro! caracter invalido, deve estar entre as letras 'a' e 'h' e numeros de 1 a 8");
+		}
+	}
+	
+	
 	public static void printBoard(ChassPiece[][] pieces) {
 		for(int i=0; i<pieces.length; i++) {
 			 System.out.print((8 - i) + " ");
