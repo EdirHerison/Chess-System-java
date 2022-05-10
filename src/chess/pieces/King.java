@@ -14,4 +14,10 @@ public class King extends ChassPiece{
 		return "K";
 	}
 
+	@Override
+	public boolean[][] possibleMoves() {
+		boolean[][] mat = new boolean[getBoard().getLines()][getBoard().getColumns()];
+		return mat;
+	}
+
 }

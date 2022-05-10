@@ -5,7 +5,7 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
-import chess.ChassPosition;
+
 
 public class ChassMatch {
  
@@ -44,6 +44,9 @@ public class ChassMatch {
 	private void validateSourcePosition(Position position) {
 		if(!board.thereIsPiece(position)) {
 			throw new ChassException("Erro! Não existe peça nessa posição");
+		}
+		if(!board.piece(position).isThereAnyPossibleMove()) {
+			throw new ChassException("Erro! sem movimentos possiveis para a peça escolhida.");
 		}
 		
 	}
