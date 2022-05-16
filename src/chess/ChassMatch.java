@@ -30,6 +30,7 @@ public class ChassMatch {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
 		validateSourcePosition(source);
+		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
 		return (ChassPiece)capturedPiece;
 	}
@@ -51,6 +52,12 @@ public class ChassMatch {
 		
 	}
 	
+
+	private void validateTargetPosition(Position source, Position target) {
+		if (!board.piece(source).possibleMove(target)) {
+			throw new ChassException("Erro! A peca nao pode se movida para posicao escolhida");
+		}
+	}
 	private void placeNewPiece(char column, int line, ChassPiece piece) {
 		board.placePiece(piece, new ChassPosition(column, line).toPosition());
 	}
