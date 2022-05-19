@@ -9,11 +9,23 @@ import chess.pieces.Rook;
 
 public class ChassMatch {
  
+	private int turn;
+	private Color currentPlayer;
 	private Board board;
 
 	public ChassMatch() {
 		board = new Board(8, 8);
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup();
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 	
 	public ChassPiece[][] getPieces(){
@@ -38,6 +50,7 @@ public class ChassMatch {
 		validateSourcePosition(source);
 		validateTargetPosition(source, target);
 		Piece capturedPiece = makeMove(source, target);
+		nextTurn();
 		return (ChassPiece)capturedPiece;
 	}
 	
@@ -52,6 +65,11 @@ public class ChassMatch {
 		if(!board.thereIsPiece(position)) {
 			throw new ChassException("Erro! Não existe peça nessa posição");
 		}
+		
+		if (currentPlayer != ((ChassPiece)board.piece(position)).getColor()) {
+			throw new ChassException("Erro! A peca escolhida não peretence a voce.");
+		}
+		
 		if(!board.piece(position).isThereAnyPossibleMove()) {
 			throw new ChassException("Erro! sem movimentos possiveis para a peça escolhida.");
 		}
@@ -62,6 +80,11 @@ public class ChassMatch {
 		if (!board.piece(source).possibleMove(target)) {
 			throw new ChassException("Erro! A peca nao pode se movida para posicao escolhida");
 		}
+	}
+	
+	private void nextTurn() {
+		turn ++;
+		currentPlayer = (currentPlayer == Color.WHITE) ? Color.BLACK : Color.WHITE;
 	}
 	private void placeNewPiece(char column, int line, ChassPiece piece) {
 		board.placePiece(piece, new ChassPosition(column, line).toPosition());

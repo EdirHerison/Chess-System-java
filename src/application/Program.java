@@ -19,7 +19,7 @@ public class Program {
 	 while (true) {
 		try {
 			UI.clearScreen();
-			UI.printBoard(chassMacth.getPieces());
+			UI.printMatch(chassMacth);
 			System.out.println();
 			System.out.print("Origem(source): ");
 			ChassPosition source = UI.readChassPosition(sc);
