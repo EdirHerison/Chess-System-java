@@ -26,6 +26,12 @@ public class ChassMatch {
 		 return mat;
 	}
 	
+	public boolean [][] possibleMoves (ChassPosition sourcePosition){
+		Position position = sourcePosition.toPosition();
+		validateSourcePosition(position);
+		return board.piece(position).possibleMoves();
+	}
+	
 	public ChassPiece performChassMovie(ChassPosition sourcePosition, ChassPosition targetPosition) {
 		Position source = sourcePosition.toPosition();
 		Position target = targetPosition.toPosition();
@@ -52,7 +58,6 @@ public class ChassMatch {
 		
 	}
 	
-
 	private void validateTargetPosition(Position source, Position target) {
 		if (!board.piece(source).possibleMove(target)) {
 			throw new ChassException("Erro! A peca nao pode se movida para posicao escolhida");

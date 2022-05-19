@@ -24,6 +24,9 @@ public class Program {
 			System.out.print("Origem(source): ");
 			ChassPosition source = UI.readChassPosition(sc);
 			
+			boolean[][] possibleMoves = chassMacth.possibleMoves(source);
+			UI.clearScreen();
+			UI.printBoard(chassMacth.getPieces(), possibleMoves);
 		    System.out.println();
 		    System.out.print("Destino(target): ");
 		    ChassPosition target = UI.readChassPosition(sc);
