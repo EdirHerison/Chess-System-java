@@ -57,6 +57,9 @@ public class UI {
 		System.out.println();
 		System.out.println("Turno : " + chassMatch.getTurn());
 		System.out.println("Esperando Jogador: " + chassMatch.getCurrentPlayer());
+		if(chassMatch.getCheck()) {
+			System.out.println("Xeque!!!");
+		}
 	}
 	
 	public static void printBoard(ChassPiece[][] pieces) {
